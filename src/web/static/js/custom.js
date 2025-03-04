@@ -2,6 +2,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     const analyzeForm = document.getElementById('analyze-form');
     if (analyzeForm) {
+        // Réinitialiser l'état du bouton au chargement de la page
+        const submitBtn = analyzeForm.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<i class="fas fa-chart-line"></i> Analyser le profil`;
+        }
+        
         analyzeForm.addEventListener('submit', function(e) {
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
@@ -17,6 +24,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 30000);
         });
     }
+    
+    // Gérer le retour à la page via le bouton retour du navigateur
+    window.addEventListener('pageshow', function(event) {
+        // Si l'événement persisted est true, cela signifie que la page a été chargée depuis le cache (bouton retour)
+        if (event.persisted) {
+            const analyzeForm = document.getElementById('analyze-form');
+            if (analyzeForm) {
+                const submitBtn = analyzeForm.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `<i class="fas fa-chart-line"></i> Analyser le profil`;
+                }
+            }
+        }
+    });
     
     // Animation des cartes de statistiques
     const statsCards = document.querySelectorAll('.stats-card');

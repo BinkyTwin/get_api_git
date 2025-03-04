@@ -58,11 +58,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script>
-document.getElementById('analyze-form').addEventListener('submit', function(e) {
-    const submitBtn = this.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Analyse en cours...';
-});
-</script>
+<!-- Le comportement du bouton est maintenant entièrement géré dans custom.js -->
 {% endblock %} 

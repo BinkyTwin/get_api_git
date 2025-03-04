@@ -37,7 +37,7 @@ github_client = GitHubClient(token=os.getenv('GITHUB_TOKEN'))
 @app.route('/')
 def index():
     """Page d'accueil avec le formulaire d'analyse."""
-    # Nettoyer la session à chaque nouvelle visite
+    # Nettoyer la session à chaque visite de la page d'accueil
     session.clear()
     return render_template('index.html')
 
