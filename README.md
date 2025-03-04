@@ -2,6 +2,9 @@
 
 Un outil web pour analyser et visualiser l'activité d'un utilisateur GitHub. Cet outil permet d'obtenir des statistiques détaillées, des visualisations et des exports de données pour n'importe quel profil GitHub public.
 
+![image](https://github.com/user-attachments/assets/a522ae63-cc7b-4986-bd05-c9a878b779b7)
+
+
 ## Fonctionnalités
 
 - 📊 Statistiques globales (commits, PRs, issues, dépôts)
