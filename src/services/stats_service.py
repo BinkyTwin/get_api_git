@@ -19,7 +19,7 @@ class StatsService:
             event_date = event["created_at"].date()
             stats["events_by_type"][event["type"]] += 1
             stats["total_repos"].add(event["repo_name"])
-            stats["activity_by_day"][event_date] += 1
+            stats["activity_by_day"][event_date.isoformat()] += 1
             
             if event["type"] == "PushEvent":
                 stats["total_commits"] += event["details"]["commits"]
@@ -51,13 +51,14 @@ class StatsService:
                 continue
                 
             date = event["created_at"].date()
-            daily_activity[date]["total"] += 1
+            date_str = date.isoformat()
+            daily_activity[date_str]["total"] += 1
             
             if event["type"] == "PushEvent":
-                daily_activity[date]["commits"] += event["details"]["commits"]
+                daily_activity[date_str]["commits"] += event["details"]["commits"]
             elif event["type"] == "IssuesEvent" and event["details"]["action"] == "opened":
-                daily_activity[date]["issues"] += 1
+                daily_activity[date_str]["issues"] += 1
             elif event["type"] == "PullRequestEvent" and event["details"]["action"] == "opened":
-                daily_activity[date]["prs"] += 1
+                daily_activity[date_str]["prs"] += 1
         
         return dict(daily_activity) 

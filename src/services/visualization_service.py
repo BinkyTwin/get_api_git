@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from typing import List, Dict, Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import pandas as pd
 from pathlib import Path
 
@@ -78,7 +78,7 @@ class VisualizationService:
         """Crée une timeline d'activité interactive."""
         # Préparer les données
         df = pd.DataFrame([{
-            'date': event['created_at'].date(),
+            'date': event['created_at'].date().isoformat() if isinstance(event['created_at'], datetime) else event['created_at'],
             'type': event['type'],
             'repo': event['repo_name']
         } for event in events])

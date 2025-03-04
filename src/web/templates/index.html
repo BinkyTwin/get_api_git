@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - Analyseur de Profil GitHub{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="fas fa-search"></i> Analyser un profil GitHub</h4>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('analyze_profile') }}" method="POST" id="analyze-form">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nom d'utilisateur GitHub</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fab fa-github"></i></span>
+                            <input type="text" class="form-control" id="username" name="username" 
+                                   placeholder="Entrez un nom d'utilisateur" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="timeframe" class="form-label">Période d'analyse</label>
+                        <select class="form-select" id="timeframe" name="timeframe">
+                            <option value="24h">Dernières 24 heures</option>
+                            <option value="48h">Dernières 48 heures</option>
+                            <option value="1w">Dernière semaine</option>
+                            <option value="2w">2 dernières semaines</option>
+                            <option value="30d" selected>30 derniers jours</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-chart-line"></i> Analyser le profil
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-info-circle"></i> À propos</h5>
+            </div>
+            <div class="card-body">
+                <p>Cet outil vous permet d'analyser rapidement l'activité d'un utilisateur GitHub en visualisant :</p>
+                <ul>
+                    <li>Les statistiques globales de contribution</li>
+                    <li>La distribution des types d'activités</li>
+                    <li>L'historique des commits</li>
+                    <li>Les dépôts les plus actifs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('analyze-form').addEventListener('submit', function(e) {
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Analyse en cours...';
+});
+</script>
+{% endblock %} 

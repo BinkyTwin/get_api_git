@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 from typing import List, Dict, Union
-from datetime import datetime
+from datetime import datetime, date
 from pathlib import Path
 from PyPDF2 import PdfWriter, PdfReader
 import os
@@ -46,7 +46,7 @@ class ExportService:
         output_path = os.path.join(export_dir, ExportService.generate_filename(filename, "json"))
         
         def datetime_handler(obj):
-            if isinstance(obj, datetime):
+            if isinstance(obj, (datetime, date)):
                 return obj.isoformat()
             return str(obj)
         
